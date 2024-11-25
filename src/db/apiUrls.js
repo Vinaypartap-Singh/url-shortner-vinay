@@ -105,12 +105,13 @@ export async function getUrl({ id, user_id }) {
   const { data, error } = await supabase
     .from("urls")
     .select("*")
+    .eq("id", id)
     .eq("user_id", user_id)
     .single();
 
   if (error) {
-    console.log(error);
-    throw new Error("Short url not found");
+    console.error(error);
+    throw new Error("Short Url not found");
   }
 
   return data;
